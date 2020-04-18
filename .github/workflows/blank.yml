@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Hello world action step
       id: hello
-      uses: medyagh/minikube-actiond@v0.0.2
+      uses: medyagh/minikube-action@v0.0.2
       with:
         who-to-greet: 'Mona the Octocat'
         driver: 'docker'
