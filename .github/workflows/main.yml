@@ -1,5 +1,7 @@
 name: CI2
-on: [push pull_request]
+on:   
+  - push 
+  - pull_request
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
