@@ -10,8 +10,6 @@ jobs:
     - name: minikube step
       id: minikube
       uses: medyagh/minikube-action@master
-      with:
-        driver: "none"
     - name: get output from minikube-action
       run: echo "The time was ${{ steps.minikube.outputs.time }}"
     - name: get output from minikube-action2
