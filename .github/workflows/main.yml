@@ -13,7 +13,8 @@ jobs:
     # now you can run kubectl to see the pods in the cluster
     - name: kubectl 
       run: kubectl get pods -A
-    - name: docker ps
+    - name: docker ps-ing
+      shell: bash
       run: | 
         docker ps
         eval $(minikube -p minikube docker-env)
