@@ -12,6 +12,7 @@ jobs:
       uses: medyagh/minikube-action@master
       with:
         who-to-greet: 'Mona the Octocat'
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
-    - name: Get the output driver
-      run: echo "The driver was ${{ steps.hello.outputs.user_driver }}"
+    - name: get output from minikube-action
+      run: |
+      echo "The time was ${{ steps.hello.outputs.time }}"
+      echo "The driver was ${{ steps.hello.outputs.user_driver }}"
