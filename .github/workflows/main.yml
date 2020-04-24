@@ -14,5 +14,8 @@ jobs:
       run: echo "The time was ${{ steps.minikube.outputs.time }}"
     - name: get output from minikube-action2
       run: echo "The driver was ${{ steps.minikube.outputs.user_driver }}"
+    - name: kubectl 
+      run: kubectl get pods -A
+
 
       
