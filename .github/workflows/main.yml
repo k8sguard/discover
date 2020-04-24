@@ -3,17 +3,15 @@ on:
   - push 
   - pull_request
 jobs:
-  hello_world_job:
+  job1:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: some name for my job1
     steps:
-    - name: Hello world action step
+    - name: minikube step
       id: hello
       uses: medyagh/minikube-action@master
       with:
         who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-    - name: Get the output time
       run: echo "The time was ${{ steps.hello.outputs.time }}"
     - name: Get the output driver
       run: echo "The driver was ${{ steps.hello.outputs.user_driver }}"
