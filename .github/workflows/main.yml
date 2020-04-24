@@ -7,21 +7,23 @@ jobs:
     runs-on: ubuntu-latest
     name: some name for my job1
     steps:
-    - name: minikube step
+    - name: start minikube
       id: minikube
       uses: medyagh/minikube-action@master
     # now you can run kubectl to see the pods in the cluster
-    - name: kubectl 
+    - name: deploy my app to minikube
       run: kubectl get pods -A
     - name: docker ps-ing
       shell: bash
       run: | 
+        echo  "------------------------------------"
         docker ps
+        echo  "------------------------------------"
         echo -n "$BASH_VERSION"
+        echo  "------------------------------------"
         echo $(which bash)
+        echo  "------------------------------------"
         export SHELL=/bin/bash
-        eval $(minikube -p minikube docker-env)
-        docker ps
-
+        
 
       
