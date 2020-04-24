@@ -10,8 +10,14 @@ jobs:
     - name: minikube step
       id: minikube
       uses: medyagh/minikube-action@master
+    # now you can run kubectl to see the pods in the cluster
     - name: kubectl 
       run: kubectl get pods -A
+    - name: docker ps
+      run: | 
+        docker ps
+        eval $(minikube -p minikube docker-env)
+        docker ps
 
 
       
