@@ -17,6 +17,7 @@ jobs:
       shell: bash
       run: | 
         docker ps
+        echo -n "$BASH_VERSION"
         eval $(minikube -p minikube docker-env)
         docker ps
 
