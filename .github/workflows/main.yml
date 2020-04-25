@@ -37,5 +37,7 @@ jobs:
         curl $(minikube service discover2 --url)/version
         echo -n "----------------------------------------"       
         curl $(kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
-
+        echo -n "----------------------------------------"       
+        ps aux 
+        echo -n "----------------------------------------"       
       
