@@ -22,27 +22,10 @@ jobs:
         docker images
     - name: Deploy to minikube
       run: 
-        kubectl apply -f deploy/deploy-minikube-loadbalancer.yaml
+        kubectl apply -f deploy/deploy-minikube.yaml
     - name: Test service URLs
       run: | 
-        docker images
-        echo -n "---------------------------------------"
         minikube service list
-        kubectl wait --for=condition=Available deploy/discover2
-        kubectl get pods 
-        kubectl get deploy
-        kubectl get svc
-        kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}'
-        echo -n "----------------------------------------"       
-        ps aux 
-        echo -n "----------------------------------------"       
-        kubectl get deploy -A
-        echo -n "----------------------------------------"
-        kubectl get svc -A
-        echo -n "----------------------------------------"
-        while [ -z $external_ip ]; do   echo "Waiting for end point...";   external_ip=$(kubectl get svc discover2 --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}");   [ -z "$external_ip" ] && sleep 10; done
-        echo -n "----------------------------------------"
-        echo -n $(kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
-        echo -n $(kubectl get services discover2 --output=jsonpath='{.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}')
-        echo -n "----------------------------------------"
-        curl $(kubectl get services discover2 --output=jsonpath='{.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}')
+        minikube service discover --url
+        echo -n "------------------opening the service------------------"
+        curl $(minikube service discover --url)/version
