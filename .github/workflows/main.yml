@@ -5,25 +5,21 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    name: some name for my job1
+    name: build discover and deploy 
     steps:
-    - name: start minikube
-      id: minikube
+    - uses: actions/checkout@v2
+    - name: Start minikube
       uses: medyagh/minikube-action@master
-    # now you can run kubectl to see the pods in the cluster
-    - name: deploy my app to minikube
+      # now you can run kubectl to see the pods in the cluster
+    - name: Try the cluster !
       run: kubectl get pods -A
-    - name: docker ps-ing
-      shell: bash
+    - name: build docker image in minikube
       run: | 
-        echo  "------------------------------------"
-        docker ps
-        echo  "------------------------------------"
-        echo -n "$BASH_VERSION"
-        echo  "------------------------------------"
-        echo $(which bash)
-        echo  "------------------------------------"
         export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
+        make build-image
+        echo -n "verifying images:"
+        docker images
         
 
       
