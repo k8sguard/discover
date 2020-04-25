@@ -13,7 +13,7 @@ jobs:
       # now you can run kubectl to see the pods in the cluster
     - name: Try the cluster !
       run: kubectl get pods -A
-    - name: Build image in minikube
+    - name: Build image 
       run: | 
         export SHELL=/bin/bash
         eval $(minikube -p minikube docker-env)
@@ -23,11 +23,9 @@ jobs:
     - name: Deploy to minikube
       run: 
         kubectl apply -f deploy/deploy-minikube.yaml
-    - name: Test Service URLs
+    - name: Test service URLs
       run: | 
         minikube service list
-        echo -n "----------have minikube wait for our service to be up---------------------"
-        minikube service discover
         echo -n "----------------------------------------"
         curl $(minikube service discover --url)/version
         echo -n "----------------------------------------"
