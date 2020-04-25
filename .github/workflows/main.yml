@@ -41,5 +41,6 @@ jobs:
         kubectl get svc -A
         echo -n "----------------------------------------"
         echo -n $(kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
+        echo -n $(kubectl get services discover2 --output=jsonpath='{.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}')
         echo -n "----------------------------------------"
-        curl $(kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
+        curl $(kubectl get services discover2 --output=jsonpath='{.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}')
