@@ -34,8 +34,8 @@ jobs:
         kubectl get svc
         kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}'
         echo -n "----------------------------------------"
-        curl $(minikube service discover2 --url)/version
-        echo -n "----------------------------------------"       
+        echo -n $(kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
+        echo -n "----------------------------------------"
         curl $(kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
         echo -n "----------------------------------------"       
         ps aux 
