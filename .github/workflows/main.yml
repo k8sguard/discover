@@ -22,14 +22,20 @@ jobs:
         docker images
     - name: Deploy to minikube
       run: 
-        kubectl apply -f deploy/deploy-minikube.yaml
+        kubectl apply -f deploy/deploy-minikube-loadbalancer.yaml
     - name: Test service URLs
       run: | 
+        docker images
+        echo -n "---------------------------------------"
         minikube service list
+        kubectl wait --for=condition=Available deploy/discover2
+        kubectl get pods 
+        kubectl get deploy
+        kubectl get svc
+        kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}'
         echo -n "----------------------------------------"
-        curl $(minikube service discover --url)/version
-        echo -n "----------------------------------------"
-       
-
+        curl $(minikube service discover2 --url)/version
+        echo -n "----------------------------------------"       
+        curl $(kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
 
       
