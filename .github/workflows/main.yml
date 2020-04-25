@@ -26,10 +26,8 @@ jobs:
     - name: Test Service URLs
       run: | 
         minikube service list
-        echo -n "----------------------------------------"
-        kubectl get pods -A
-        echo -n "----------------------------------------"
-        kubectl get svc -A
+        echo -n "----------have minikube wait for our service to be up---------------------"
+        minikube service discover
         echo -n "----------------------------------------"
         curl $(minikube service discover --url)/version
         echo -n "----------------------------------------"
