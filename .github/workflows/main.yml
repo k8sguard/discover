@@ -33,11 +33,13 @@ jobs:
         kubectl get deploy
         kubectl get svc
         kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}'
+        echo -n "----------------------------------------"       
+        ps aux 
+        echo -n "----------------------------------------"       
+        kubectl get deploy -A
+        echo -n "----------------------------------------"
+        kubectl get svc -A
         echo -n "----------------------------------------"
         echo -n $(kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
         echo -n "----------------------------------------"
         curl $(kubectl get services discover2 --output=jsonpath='{.spec.clusterIP}:{.spec.ports[0].port}')
-        echo -n "----------------------------------------"       
-        ps aux 
-        echo -n "----------------------------------------"       
-      
