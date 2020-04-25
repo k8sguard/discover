@@ -20,6 +20,10 @@ jobs:
         make build-image
         echo -n "verifying images:"
         docker images
-        
+    - name: deploy to minikube
+      run: | 
+        kubectl apply -f deploy/deploy-minikube.yaml
+        curl $(minikube service discover --url)/version
+
 
       
