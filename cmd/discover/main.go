@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-var version = "0.0.3"
+var version = "0.0.2"
 
 func versionHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "version: %s", version)
